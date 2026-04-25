@@ -43,38 +43,41 @@ function Filter({ handleFilterChange }) {
         handleFilterChange(selectedCategories, selectedValue);
     }
     return (
-        <div className='w-full md:w-[20%]'>
-            <div className='flex items-center justify-between'>
-                <h1 className='font-semibold text-lg md:text-xl'>Filter Options</h1>
-                <Select onValueChange = {selectByPriceHandler}>
-                    <SelectTrigger>
+        <div className='w-full md:w-[220px] lg:w-[240px]'>
+            <div className='flex items-center justify-between gap-3'>
+                <h1 className='font-semibold text-base sm:text-lg md:text-xl'>Filter Options</h1>
+                <Select onValueChange={selectByPriceHandler}>
+                    <SelectTrigger className="w-[120px] sm:w-[130px] text-xs sm:text-sm h-9">
                         <SelectValue placeholder="Sort by" />
                     </SelectTrigger>
                     <SelectContent>
                         <SelectGroup>
-                            <SelectLabel>Sort by price</SelectLabel>
-                            <SelectItem value="low">Low to High</SelectItem>
-                            <SelectItem value="high">High to Low</SelectItem>
+                            <SelectLabel className="text-xs">Sort by price</SelectLabel>
+                            <SelectItem value="low" className="text-sm">Low to High</SelectItem>
+                            <SelectItem value="high" className="text-sm">High to Low</SelectItem>
                         </SelectGroup>
                     </SelectContent>
                 </Select>
             </div>
-            <Separator className="my-4" />
+            <Separator className="my-3 sm:my-4" />
             <div>
-                <h1 className='font-semibold mb-2'>CATEGORY</h1>
-                {
-                    categories.map((category) => (
-                        <div className='flex items-center space-x-2 my-2'>
-                            <Checkbox
-                                id={category.id}
-                                onCheckedChange={() => handleCategoryChange(category.id)}
-                            />
-                            <Label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                                {category.label}
-                            </Label>
-                        </div>
-                    ))
-                }
+                <h1 className='font-semibold mb-2 text-xs sm:text-sm uppercase tracking-wider text-muted-foreground'>Category</h1>
+                <div className='grid grid-cols-2 md:grid-cols-1 gap-x-4 gap-y-1'>
+                    {
+                        categories.map((category) => (
+                            <div key={category.id} className='flex items-center space-x-2 my-1 sm:my-1.5'>
+                                <Checkbox
+                                    id={category.id}
+                                    onCheckedChange={() => handleCategoryChange(category.id)}
+                                    className="h-3.5 w-3.5 sm:h-4 sm:w-4"
+                                />
+                                <Label className="text-xs sm:text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer" htmlFor={category.id}>
+                                    {category.label}
+                                </Label>
+                            </div>
+                        ))
+                    }
+                </div>
             </div>
         </div>
     )

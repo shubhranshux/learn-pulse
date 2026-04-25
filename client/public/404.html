@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LearnPulse — Redirecting...</title>
+    <script>
+      // Single Page App redirect for GitHub Pages / static hosting
+      // Redirects all 404s back to index.html with the path stored in sessionStorage
+      sessionStorage.redirect = location.href;
+      location.replace(location.origin);
+    </script>
+  </head>
+  <body></body>
+</html>

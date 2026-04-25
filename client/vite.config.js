@@ -11,4 +11,12 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    // Handle client-side routing - redirect all requests to index.html
+    historyApiFallback: true,
+  },
+  build: {
+    // Copy _redirects to dist for Netlify/Vercel deployments
+    copyPublicDir: true,
+  },
 })
