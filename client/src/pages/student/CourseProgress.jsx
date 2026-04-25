@@ -5,6 +5,7 @@ import { CheckCircle, CheckCircle2, CirclePlay, Loader2, PlayCircle, AlertCircle
 import { useCompleteCourseMutation, useGetCourseProgressQuery, useInCompleteCourseMutation, useUpdateLectureProgressMutation } from '../../features/api/courseProgressApi';
 import { useParams } from 'react-router-dom';
 import { toast } from 'sonner';
+import ReactPlayer from 'react-player';
 
 function CourseProgress() {
     const params = useParams();
@@ -100,13 +101,21 @@ function CourseProgress() {
                 <div className='flex-1 p-3 sm:p-4 lg:p-6'>
                     <div className='bg-black rounded-lg sm:rounded-xl overflow-hidden shadow-xl'>
                         {activeVideoUrl ? (
-                            <video
-                                key={activeVideoUrl}
-                                src={activeVideoUrl}
-                                controls
-                                className='w-full aspect-video'
-                                onPlay={() => handleLectureProgress(activeLecture?._id)}
-                            />
+                            <div className='aspect-video'>
+                                <ReactPlayer
+                                    key={activeVideoUrl}
+                                    url={activeVideoUrl}
+                                    width="100%"
+                                    height="100%"
+                                    controls={true}
+                                    onPlay={() => handleLectureProgress(activeLecture?._id)}
+                                    config={{
+                                        file: {
+                                            attributes: { controlsList: 'nodownload' }
+                                        }
+                                    }}
+                                />
+                            </div>
                         ) : (
                             <div className='w-full aspect-video flex flex-col items-center justify-center bg-[#1e1b4b]'>
                                 <AlertCircle size={32} className='text-white/30 mb-2 sm:mb-3' />
